@@ -13,7 +13,7 @@ impl CloseCurrentCommand {
         let Some(active_client) = active_client else { return Ok(()) };
 
         if let Some(name) = active_client.workspace.name.strip_prefix("special:") {
-            Dispatch::call(DispatchType::ToggleSpecialWorkspace(Some(name)))?;
+            Dispatch::call(DispatchType::ToggleSpecialWorkspace(Some(name.to_owned())))?;
         }
 
         Ok(())

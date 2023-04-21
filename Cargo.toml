@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-hyprland = { path = "../hyprland-rs" }
+hyprland = "0.3.2"
 clap = { version = "4.0", features = ["derive"] }
 anyhow = "1.0"
+itertools = "0.10"

@@ -2,6 +2,7 @@ use clap::Args;
 use hyprland::data::Workspaces;
 use hyprland::dispatch::{Dispatch, DispatchType};
 use hyprland::prelude::*;
+use itertools::Itertools;
 use std::thread;
 use std::time::Duration;
 
@@ -33,7 +34,7 @@ impl ToggleExecCommand {
 
         let target_workspace_name = format!("special:{name}");
 
-        let workspaces = Workspaces::get()?.collect();
+        let workspaces = Workspaces::get()?.collect_vec();
         let workspace_is_spawned = workspaces
             .iter()
             .any(|workspace| workspace.name == target_workspace_name);
@@ -46,7 +47,7 @@ impl ToggleExecCommand {
             for _ in 0..max_retries {
                 thread::sleep(TIMEOUT);
 
-                let workspaces = Workspaces::get()?.collect();
+                let workspaces = Workspaces::get()?.collect_vec();
                 let is_spawned = workspaces
                     .iter()
                     .any(|workspace| workspace.name == target_workspace_name);
@@ -57,7 +58,7 @@ impl ToggleExecCommand {
             }
         }
 
-        Dispatch::call(DispatchType::ToggleSpecialWorkspace(Some(&name)))?;
+        Dispatch::call(DispatchType::ToggleSpecialWorkspace(Some(name)))?;
 
         Ok(())
     }
