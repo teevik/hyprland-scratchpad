@@ -2,7 +2,6 @@ use clap::Args;
 use hyprland::data::Clients;
 use hyprland::dispatch::{Dispatch, DispatchType, WindowIdentifier};
 use hyprland::prelude::*;
-use itertools::Itertools;
 
 /// Kills all clients in a special workspace
 #[derive(Args)]
@@ -15,7 +14,7 @@ impl KillCommand {
     pub fn run(self) -> anyhow::Result<()> {
         let Self { name } = self;
 
-        let clients = Clients::get()?.collect_vec();
+        let clients = Clients::get()?;
 
         for client in clients {
             if client.workspace.name == format!("special:{name}") {

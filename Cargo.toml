@@ -4,7 +4,6 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-hyprland = "0.3.2"
-clap = { version = "4.0", features = ["derive"] }
-anyhow = "1.0"
-itertools = "0.10"
+hyprland = { git = "https://github.com/hyprland-community/hyprland-rs.git", rev="0.4.0-alpha.2" }
+clap = { version = "4", features = ["derive"] }
+anyhow = "1"
